@@ -37,8 +37,8 @@ const CardsList = () => {
 
   const isEqual = () => {
     if (firstCard != null && secondCard != null) {
-      console.log(firstCard);
-      console.log(secondCard);
+      // console.log(firstCard);
+      // console.log(secondCard);
       if (firstCard == secondCard) {
         // console.log("equal");
         setFirstCard(null);

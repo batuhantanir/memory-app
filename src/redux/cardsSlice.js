@@ -12,17 +12,25 @@ export const cardsSlice = createSlice({
       state.cards.find((item) => item.id === action.payload).show = true;
     },
     updateChecked: (state, { payload }) => {
-      console.log(payload);
+      // console.log(payload);
       if (payload.equal === true) {
-        console.log("equal");
+        // console.log("equal");
+        state.cards.find(
+          (item) => item.id === payload.firstCardId
+        ).checked = true;
+        state.cards.find(
+          (item) => item.id === payload.secondCardId
+        ).checked = true;
+        state.point += 50;
       } else if (payload.equal === false) {
-        console.log(" not equal");
-          state.cards.find(
-            (item) => item.id === payload.firstCardId
-          ).show = false;
-          state.cards.find(
-            (item) => item.id === payload.secondCardId
-          ).show = false;
+        // console.log(" not equal");
+        state.point -= 10;
+        state.cards.find(
+          (item) => item.id === payload.firstCardId
+        ).show = false;
+        state.cards.find(
+          (item) => item.id === payload.secondCardId
+        ).show = false;
       }
     },
   },
