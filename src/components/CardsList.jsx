@@ -1,20 +1,14 @@
 import React from "react";
-
-import { useSelector } from "react-redux";
-import { cardsSelector } from "../redux/cardsSlice";
-
 import Card from "./Card";
+import { useSelector } from "react-redux";
 
 const CardsList = () => {
-  const cardsSelect = useSelector(cardsSelector.selectEntities);
-  const cardsTotal = useSelector(cardsSelector.selectTotal);
-  console.log(cardsSelect);
+  const cards = useSelector((state) => state.cards.cards);
+  // console.log(cards);
 
   return (
-    <div className="grid">
-      {/* {cards && cards.map((card)=>(
-      <Card card={card} />
-    ))} */}
+    <div className="flex flex-wrap justify-center py-5 w-[40%]">
+      {cards && cards.map((card) => <Card card={card} key={card.id} />)}
     </div>
   );
 };

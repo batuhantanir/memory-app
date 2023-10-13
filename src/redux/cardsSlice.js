@@ -1,18 +1,17 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-
-export const cardsAdaptor = createEntityAdapter();
-const initialState = cardsAdaptor.getInitialState();
-
-export const cardsSelector = cardsAdaptor.getSelectors(state=>state.cards)
+import { createSlice } from "@reduxjs/toolkit";
+import Items from "../items/Items";
 
 export const cardsSlice = createSlice({
   name: "cards",
-  initialState,
+  initialState: {
+    cards: Items.sort( () => .5 - Math.random() ),
+    point:0,
+  },
   reducers: {
-    addCards: cardsAdaptor.addMany,
+
   },
 });
 
-export const { addCards } = cardsSlice.actions;
+export const { addCards  } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
