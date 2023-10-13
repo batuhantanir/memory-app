@@ -1,7 +1,12 @@
 import React from "react";
 import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
-import { updateChecked, updateShow } from "../redux/cardsSlice";
+import {
+  getCards,
+  isAllCheck,
+  updateChecked,
+  updateShow,
+} from "../redux/cardsSlice";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -14,6 +19,15 @@ const CardsList = () => {
   const [secondCardId, setSecondCardId] = useState(null);
 
   const dispatch = useDispatch();
+  //useEffect
+  useEffect(() => {
+    isEqual();
+    setTimeout(() => {
+      dispatch(isAllCheck());
+    }, 1000);
+  }, [firstCard, secondCard]);
+
+  //show card
   const showCard = (e) => {
     // console.log(e.target.accessKey);
     dispatch(updateShow(e.target.id));
@@ -31,10 +45,7 @@ const CardsList = () => {
     }
   };
 
-  useEffect(() => {
-    isEqual();
-  }, [firstCard, secondCard]);
-
+  //is equal
   const isEqual = () => {
     if (firstCard != null && secondCard != null) {
       // console.log(firstCard);
@@ -59,7 +70,7 @@ const CardsList = () => {
 
   return (
     <div className="flex flex-wrap justify-center py-5 w-[40%]">
-      {cards &&
+      {cards.length != 0 &&
         cards.map((card) => (
           <Card card={card} key={card.id} showCard={showCard} />
         ))}

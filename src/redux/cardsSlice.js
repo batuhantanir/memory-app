@@ -6,8 +6,12 @@ export const cardsSlice = createSlice({
   initialState: {
     cards: Items.sort(() => 0.5 - Math.random()),
     point: 0,
+    isAllChecked: false,
   },
   reducers: {
+    getCards: (state) => {
+      window.location.reload();
+    },
     updateShow: (state, action) => {
       state.cards.find((item) => item.id === action.payload).show = true;
     },
@@ -33,9 +37,19 @@ export const cardsSlice = createSlice({
         ).show = false;
       }
     },
+    isAllCheck: (state) => {
+      if (
+        state.cards.filter((item) => item.checked === true).length ==
+        state.cards.length
+      ) {
+        state.isAllChecked = true;
+        state.cards = [];
+      }
+    },
   },
 });
 
-export const { updateShow, updateChecked } = cardsSlice.actions;
+export const { updateShow, updateChecked, isAllCheck, getCards } =
+  cardsSlice.actions;
 
 export default cardsSlice.reducer;
