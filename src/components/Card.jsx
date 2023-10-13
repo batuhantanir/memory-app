@@ -1,15 +1,22 @@
 import React from "react";
-const Card = ({ card }) => {
-  console.log(card.checked);
-  return card.checked == false ? (
+
+const Card = ({ card,showCard }) => {
+  
+
+  return (
+
     <div
       id={card.id}
-      className="flex items-center justify-center border-2 rounded w-28 h-40 m-1 "
+      className="flex items-center justify-center border-2 rounded w-28 h-40 m-1 cursor-pointer "
+      onClick={(e) => showCard(e)}
+      accessKey={card.name}
     >
-      {card.name.toUpperCase()}
+      {card.show === true || card.checked === true ? (
+        <>{card.name.toUpperCase()}</>
+      ) : (
+        <> {"Memory Card"}</>
+      )}
     </div>
-  ) : (
-    <div>Ananin ami</div>
   );
 };
 
