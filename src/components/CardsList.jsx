@@ -43,6 +43,7 @@ const CardsList = () => {
       setSecondCard(e.target.accessKey);
       setSecondCardId(e.target.id);
     }
+    // console.log(firstCard, " ", secondCard);
   };
 
   //is equal
@@ -50,7 +51,7 @@ const CardsList = () => {
     if (firstCard != null && secondCard != null) {
       // console.log(firstCard);
       // console.log(secondCard);
-      if (firstCard == secondCard) {
+      if (firstCardId != secondCardId && firstCard == secondCard) {
         // console.log("equal");
         setFirstCard(null);
         setSecondCard(null);
@@ -64,15 +65,17 @@ const CardsList = () => {
         }, 1000);
         setFirstCard(null);
         setSecondCard(null);
+      } else if (firstCardId == secondCardId && firstCard == secondCard) {
+        setSecondCard(null);
       }
     }
   };
 
   return (
-    <div className="flex flex-wrap justify-center py-5 w-[40%]">
+    <div className="flex flex-wrap justify-center py-5 container max-w-[600px]">
       {cards.length != 0 &&
-        cards.map((card) => (
-          <Card card={card} key={card.id} showCard={showCard} />
+        cards.map((card, idx) => (
+          <Card key={idx} card={card} showCard={showCard} />
         ))}
     </div>
   );
